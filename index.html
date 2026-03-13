@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Task Manager</title>
+</head>
+<body>
+
+<h2>Student Task Manager</h2>
+
+<input type="text" id="task" placeholder="Enter Task">
+
+<select id="priority">
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+</select>
+
+<button onclick="addTask()">Add Task</button>
+<br><br>
+<button onclick="showAll()">Show All</button>
+<button onclick="showCompleted()">Completed</button>
+
+<ul id="taskList"></ul>
+
+<script>
+function addTask(){
+let task = document.getElementById("task").value;
+let priority = document.getElementById("priority").value;
+
+let li = document.createElement("li");
+li.innerHTML = task + " ("+priority+")";
+
+li.onclick = function(){
+li.style.textDecoration="line-through";
+li.classList.add("done");
+}
+
+let del = document.createElement("button");
+del.innerText="Delete";
+del.onclick=function(){
+li.remove();
+}
+
+li.appendChild(del);
+document.getElementById("taskList").appendChild(li);
+}
+
+function showAll(){
+let tasks=document.querySelectorAll("#taskList li");
+tasks.forEach(t=>t.style.display="block");
+}
+
+function showCompleted(){
+let tasks=document.querySelectorAll("#taskList li");
+tasks.forEach(t=>{
+if(t.classList.contains("done"))
+t.style.display="block";
+else
+t.style.display="none";
+});
+}
+</script>
+
+</body>
+</html>
